@@ -25,11 +25,11 @@ public class BattleFieldTemplate extends JPanel {
 	 */
 	void runTheGame() throws Exception {
 		
-		void move(int direction) {
-			int step = 64;
+		void move(int direction)  {
+			int step = 64; // кол-во пикселов на которые будет ездить танк
 			
 			// дальше проверяем границы поля
-			if ((direction == 1 && tankY == 0) || (direction == 2 && tankY >= 512)
+			if ((direction == 1 && tankY == 0) || (direction == 2 && tankY >= 512) // проверяет границы поля боя.
 					|| (direction == 3 && tankX == 0) || (direction == 4 && tankX >=512)) {
 				System.out.println("illegal move] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
 				return;

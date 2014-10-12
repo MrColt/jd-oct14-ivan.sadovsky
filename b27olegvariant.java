@@ -4,10 +4,9 @@ public class b27olegvariant {
 
 	public static void main(String[] args) {
 		
-		printCoordinates ("a", "9");
-		/**
-		 * -TANKS-
-		 */
+		printCoordinates ("a", "3");
+	
+		
 	}
 		static void printCoordinates(String v, String h) {
 			String coordinates = getQuadrantXY(v, h);
@@ -16,7 +15,9 @@ public class b27olegvariant {
 			System.out.println(v + h +":(" + x + "px," + y + "px)");
 		}
 		static String getQuadrantXY(String v, String h) {
+			
 			int hor = Integer.valueOf(h);		
+		
 			int vert = 1;
 			if (v.equals("b")) {
 				vert = 2;
@@ -35,6 +36,6 @@ public class b27olegvariant {
 			} else if (v.equals("i")) {
 				vert = 9;
 			}
-			return h;
+			return (vert - 1) * 64 + "_" + (hor - 1) * 64;
 		}
 }
