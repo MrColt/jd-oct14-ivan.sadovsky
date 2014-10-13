@@ -1,4 +1,4 @@
-package lesson2;
+package day2;
 
 public class SystemCurrentTimemillis {
 
