@@ -25,13 +25,78 @@ public class BattleFieldTemplate extends JPanel {
 	 */
 	void runTheGame() throws Exception {
 		
-		void move(int direction)  {
+		moveToQuadrant ("a", "1");
+		Thread.sleep(2000);
+		moveToQuadrant ("g", "8");
+		Thread.sleep(2000);
+		moveToQuadrant ("b", "1");
+		Thread.sleep(2000);
+		moveToQuadrant ("h", "9");
+		Thread.sleep(2000);
+		moveToQuadrant ("h", "2");
+		Thread.sleep(2000);
+		moveToQuadrant ("a", "6");
+		
+	}
+	
+	void moveToQuadrant (String v, String h) throws Exception {
+		String coordinates = getQuadrantXY(v, h); // переводим в реальные координаты
+		int separator = coordinates.indexOf("_");
+		int y = Integer.parseInt(coordinates.substring(0, separator));
+		int x = Integer.parseInt(coordinates.substring(separator + 1));
+		
+		if(tankX < x) { 
+			while (tankX != x) {
+				move(4); // идем вправо
+			}
+		} else {
+			while (tankX != x) {
+				move(3); // идем влево
+			}
+		}
+				
+		if (tankY < y) {
+			while (tankY != y) {
+				move(2); // идем вниз
+			}
+		} else {
+			while (tankY != y) {
+				move(1); // идем вверх
+			}
+		}
+	}
+	
+		static String getQuadrantXY(String v, String h) {
+			int hor = Integer.valueOf(h);
+			
+			int vert = 1;
+			if (v.equals("b")) {
+				vert = 2;
+			}else if (v.equals("c")) {
+				vert = 3;
+			}else if (v.equals("d")) {
+				vert = 4;
+			}else if (v.equals("e")) {
+				vert = 5;
+			}else if (v.equals("f")) {
+				vert = 6;
+			}else if (v.equals("g")) {
+				vert = 7;
+			}else if (v.equals("h")) {
+				vert = 8;
+			}else if (v.equals("i")) {
+				vert = 9;
+			}
+			return (vert - 1) * 64 + "_" + (hor - 1 )* 64;
+		}
+
+		void move(int direction) throws Exception {
 			int step = 64; // кол-во пикселов на которые будет ездить танк
 			
 			// дальше проверяем границы поля
 			if ((direction == 1 && tankY == 0) || (direction == 2 && tankY >= 512) // проверяет границы поля боя.
 					|| (direction == 3 && tankX == 0) || (direction == 4 && tankX >=512)) {
-				System.out.println("illegal move] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
+				System.out.println("illegal move direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
 				return;
 			}
 			if (direction == 1) {
@@ -42,23 +107,17 @@ public class BattleFieldTemplate extends JPanel {
 				System.out.println("[move down] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
 			} else if (direction == 3) {
 				tankX -= step;
-				System.out.println("[move left] directionL: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
+				System.out.println("[move left] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
 			} else {
 				tankX += step;
-				System.out.println("[move down] directionL: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
-			}
+				System.out.println("[move down] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
+			
 		}
 		
 			repaint();
 			Thread.sleep(speed); 
 }			
 	
-
-		// Создать метод void move(int direction) который передвигает танк в определенном направлении на один квадрат
-		// direction 1 - вверх, 2 - вниз, 3 - влево, 4 - вправо
-			
-	
-
 
 	
 	// Magic bellow. Do not worry about this now, you will understand everything
