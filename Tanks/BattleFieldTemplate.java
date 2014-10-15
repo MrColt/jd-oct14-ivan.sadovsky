@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2014 kademika.com
  */
-package tanks;
+package Tanks;
 
 import java.awt.Color;
 import java.awt.Dimension;
