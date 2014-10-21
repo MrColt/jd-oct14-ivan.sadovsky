@@ -14,119 +14,80 @@ import javax.swing.WindowConstants;
 public class BattleFieldTemplate extends JPanel {
 
 	boolean COLORDED_MODE = true;
-
+	
 	int tankX = 0;
 	int tankY = 0;
-
+	
 	long speed = 225;
-
+	
 	/**
 	 * Write your code here.
 	 */
 	void runTheGame() throws Exception {
 		
-		moveToQuadrant ("a", "1");
-		Thread.sleep(2000);
-		moveToQuadrant ("g", "8");
-		Thread.sleep(2000);
-		moveToQuadrant ("b", "1");
-		Thread.sleep(2000);
-		moveToQuadrant ("h", "9");
-		Thread.sleep(2000);
-		moveToQuadrant ("h", "2");
-		Thread.sleep(2000);
-		moveToQuadrant ("a", "6");
 		
-	}
-	
-	void moveToQuadrant (String v, String h) throws Exception {
-		String coordinates = getQuadrantXY(v, h); // переводим в реальные координаты
-		int separator = coordinates.indexOf("_");
-		int y = Integer.parseInt(coordinates.substring(0, separator));
-		int x = Integer.parseInt(coordinates.substring(separator + 1));
+		}			
 		
-		if(tankX < x) { 
-			while (tankX != x) {
-				move(4); // идем вправо
-			}
-		} else {
-			while (tankX != x) {
-				move(3); // идем влево
-			}
-		}
-				
-		if (tankY < y) {
-			while (tankY != y) {
-				move(2); // идем вниз
-			}
-		} else {
-			while (tankY != y) {
-				move(1); // идем вверх
-			}
-		}
-	}
-	
-		static String getQuadrantXY(String v, String h) {
-			int hor = Integer.valueOf(h);
-			
-			int vert = 1;
-			if (v.equals("b")) {
-				vert = 2;
-			}else if (v.equals("c")) {
-				vert = 3;
-			}else if (v.equals("d")) {
-				vert = 4;
-			}else if (v.equals("e")) {
-				vert = 5;
-			}else if (v.equals("f")) {
-				vert = 6;
-			}else if (v.equals("g")) {
-				vert = 7;
-			}else if (v.equals("h")) {
-				vert = 8;
-			}else if (v.equals("i")) {
-				vert = 9;
-			}
-			return (vert - 1) * 64 + "_" + (hor - 1 )* 64;
-		}
-
-		void move(int direction) throws Exception {
-			int step = 64; // кол-во пикселов на которые будет ездить танк
-			
-			// дальше проверяем границы поля
-			if ((direction == 1 && tankY == 0) || (direction == 2 && tankY >= 512) // проверяет границы поля боя.
-					|| (direction == 3 && tankX == 0) || (direction == 4 && tankX >=512)) {
-				System.out.println("illegal move direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
-				return;
-			}
-			if (direction == 1) {
-				tankY -= step;
-				System.out.println("[move up] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
-			} else if (direction == 2) {
-				tankY += step;
-				System.out.println("[move down] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
-			} else if (direction == 3) {
-				tankX -= step;
-				System.out.println("[move left] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
-			} else {
-				tankX += step;
-				System.out.println("[move down] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
-			
-		}
-		
-			repaint();
-			Thread.sleep(speed); 
-}			
-	
 
 	
-	// Magic bellow. Do not worry about this now, you will understand everything
-	// in this course.
+	static String getQuadrantXY(String v, String h) {
+		int hor = Integer.valueOf(h);
+		
+		int vert = 1;
+		if (v.equals("b")) {
+			vert = 2;
+		}else if (v.equals("c")) {
+			vert = 3;
+		}else if (v.equals("d")) {
+			vert = 4;
+		}else if (v.equals("e")) {
+			vert = 5;
+		}else if (v.equals("f")) {
+			vert = 6;
+		}else if (v.equals("g")) {
+			vert = 7;
+		}else if (v.equals("h")) {
+			vert = 8;
+		}else if (v.equals("i")) {
+			vert = 9;
+		}
+		return (vert - 1) * 64 + "_" + (hor - 1 )* 64;
+	}
+	
+	
+	void move(int direction) throws InterruptedException {
+		
+		int step = 1;
+		
+		if  ((direction == 1 && tankY == 0 ) || (direction == 2 && tankY >= 512 )
+			|| (direction == 3 && tankX == 0 ) || (direction == 4 && tankX >= 512 )) {
+			System.out.println("illegal move direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
+			return;
+		}
+		if (direction == 1) {
+			tankY -= step;
+			System.out.println("[move up] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
+		} else if (direction == 2) {
+			tankY += step;
+			System.out.println("[move down] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
+		} else if (direction == 3) {
+			tankX -= step;
+			System.out.println("[move left] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
+		} else {
+			tankX += step;
+			System.out.println("[move down] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
+		}
+		repaint();
+		Thread.sleep(speed);
+	}
+
+	
+	// Magic bellow. Do not worry about this now, you will understand everything in this course.
 	// Please concentrate on your tasks only.
 
 	final int BF_WIDTH = 576;
 	final int BF_HEIGHT = 576;
-
+	
 	public static void main(String[] args) throws Exception {
 		BattleFieldTemplate bf = new BattleFieldTemplate();
 		bf.runTheGame();
@@ -145,7 +106,7 @@ public class BattleFieldTemplate extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
+		
 		int i = 0;
 		Color cc;
 		for (int v = 0; v < 9; v++) {
@@ -164,7 +125,7 @@ public class BattleFieldTemplate extends JPanel {
 				g.fillRect(h * 64, v * 64, 64, 64);
 			}
 		}
-
+		
 		g.setColor(new Color(255, 0, 0));
 		g.fillRect(tankX, tankY, 64, 64);
 	}

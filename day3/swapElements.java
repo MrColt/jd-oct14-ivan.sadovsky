@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class swapElements {
 
 	public static void main(String[] args) {
-<<<<<<< HEAD
+
 
 		int [] data = {1, 2, 3, 4, 5, 6, 7};
 		
@@ -31,11 +31,7 @@ public class swapElements {
 				}
 			}
 		}
-	}	
-//}
-
-
-=======
+	
 		
 		int [] data = {1, 2, 3, 4, 5};
 		
@@ -58,10 +54,9 @@ public class swapElements {
 		}
 		
 	}
+}		
+
+
+
+
 		
-}
-
-
-
-		
->>>>>>> origin/master
