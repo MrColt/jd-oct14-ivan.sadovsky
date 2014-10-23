@@ -6,16 +6,16 @@ public class cyklusForInCode {
 		
 		int [] data = {1, 10, 5, 7, 6, 3};
 	
-		for (int i = 0; i < data.length; i++) {
-			System.out.println(data[i]);
+		for (int index = 0; index < data.length; index++) {
+			System.out.println(data[index]);
 		}
 
 	}
 
 }
 //
-//int i = 0;
-//while ( i < data.length) {
-//System.out.println(data[i]);
-//i++;
+//int index = 0;
+//while ( index < data.length) {
+//System.out.println(data[index]);
+//index++;
 //}
