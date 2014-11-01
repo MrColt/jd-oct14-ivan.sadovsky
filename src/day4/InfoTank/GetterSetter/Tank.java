@@ -1,34 +1,44 @@
-package day4;
-
-import day4.TankColorEnum.TankColor;
+package day4.InfoTank.GetterSetter;
 
 public class Tank {
 
-	private TankColor color;
+	private String color;
 	private int crew;
 	private int maxSpeed;
 
 	public Tank() {
-		this(TankColor.DARK_RED, 4, 120);
+		this("red", 4, 120);
 	}
 
 	public Tank(String color) {
-		this(TankColor.DARK_GREEN, 0, 0);
+		this(color, 0, 0);
 
 	}
 
-	public Tank(TankColor color, int crew, int maxSpeed) {
+	public Tank(String color, int crew, int maxSpeed) {
 		this.color = color;
 		this.crew = crew;
 		setMaxSpeed(maxSpeed);
 
 	}
 
-	public TankColor getColor() {
+	public Tank(int crew, String color, int maxSpeed) {
+		this.color = color;
+		this.crew = crew;
+		setMaxSpeed(maxSpeed);
+	}
+
+	public Tank(int crew, int maxSpeed, String color) {
+		this.color = color;
+		this.crew = crew;
+		setMaxSpeed(maxSpeed);
+	}
+
+	public String getColor() {
 		return color;
 	}
 
-	public void setColor(TankColor color) {
+	public void setColor(String color) {
 		this.color = color;
 	}
 
@@ -50,7 +60,5 @@ public class Tank {
 		} else {
 			this.maxSpeed = maxSpeed;
 		}
-		
 	}
-
 }
