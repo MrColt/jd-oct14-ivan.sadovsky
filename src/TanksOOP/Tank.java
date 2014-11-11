@@ -1,7 +1,9 @@
 package TanksOOP;
 
+import java.util.Random;
+
 public class Tank {
-	
+
 	private int speed = 10;
 	private int direction;
 	private int x;
@@ -10,7 +12,7 @@ public class Tank {
 	private BattleField bf;
 
 	public Tank(ActionField af, BattleField bf) {
-		this(af, bf, 128, 512, 1);
+		this(af, bf, 256, 256, 1);
 	}
 
 	public void setDirection(int direction) {
@@ -45,7 +47,7 @@ public class Tank {
 	}
 
 	public void moveRandom() throws Exception {
-
+		af.processMoveRandom(this);
 	}
 
 	public void clean() throws Exception {
@@ -76,4 +78,3 @@ public class Tank {
 		return speed;
 	}
 }
-

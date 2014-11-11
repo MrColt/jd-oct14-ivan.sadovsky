@@ -32,13 +32,8 @@ public class BattleFieldTemplateD3 extends JPanel {
 		Thread.sleep(2000);
 		moveToQuadrant (3, 4);
 		Thread.sleep(2000);
-		moveToQuadrant (5, 6);
-		Thread.sleep(2000);
-		moveToQuadrant (6, 6);
-		Thread.sleep(2000);
-		moveToQuadrant (1, 1);
-		Thread.sleep(2000);
-		moveToQuadrant (4, 5);
+		moveToQuadrant (5, 5);
+	
 		
 	}
 	

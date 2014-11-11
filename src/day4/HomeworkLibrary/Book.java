@@ -1,12 +1,12 @@
 package day4.HomeworkLibrary;
 
 public class Book {
-
+	
 	private String name;
 	private String author;
 	private Category category;
-
-	public Book() {
+	
+	public Book(){
 
 	}
 
@@ -33,5 +33,9 @@ public class Book {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+
+
+	
+
 
 }
