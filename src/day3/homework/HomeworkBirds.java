@@ -1,6 +1,7 @@
 package day3.homework;
 
 import java.util.Arrays;
+import java.util.Calendar;
 
 public class HomeworkBirds {
 
@@ -9,27 +10,43 @@ public class HomeworkBirds {
 								{ "Chicken", "20", "1", "0" }, // 3 -- price
 								{ "Hummingbird", "2", "8", "20" } // 4 -- How much sale
 
-							 };
+								};
 
 	public static void main(String[] args) {
 		// System.out.println(birdsSold() + " birds sold.");
 		// System.out.println("We have " + getBirdsCount("Duck") + " ducks.");
-		// System.out.println("New delivery needed: " + Arrays.toString(needNewDelivery());
+		// System.out.println("New delivery needed: " + Arrays.toString(needNewDelivery()));
 		// getAllInformation(birds);
-//		System.out.println(birdsLeftOnStorage() + " birds left");
-		time();
-		System.out.println(moneyInVault(birds) + " $");
+		// System.out.println(birdsLeftOnStorage() + " birds left");
+		 System.out.println("Now we have: " + moneyInVault(birds) + " $");
 	}
-	
-	static void time() {
-		long randomNumbers = System.currentTimeMillis();
-		System.out.println(String.valueOf(randomNumbers));
+
+	public static void time() {
+		Calendar c = Calendar.getInstance();
+
+		int year = c.get(c.YEAR);
+		int month = c.get(c.MONTH);
+		int date = c.get(c.DATE);
+		int hour = c.get(c.HOUR);
+		int minute = c.get(c.MINUTE);
+		int second = c.get(c.SECOND);
 		
-		
+		month++;
+		hour++;
+		minute++;
+		second++;
+
+		System.out.println("Time When You Press \"Run\" ");
+		System.out.println((hour + 11) + " : " + (minute - 1) + " : "
+				+ second);
+		System.out.println("Data " + date + "-" + month + "-" + year);
+		System.out.println();
+
 	}
 
 	static int birdsSold() {
 		int result = 0;
+		time();
 		for (String[] arr : birds) {
 			result += Integer.parseInt(arr[3]);
 
@@ -38,6 +55,7 @@ public class HomeworkBirds {
 	}
 
 	static int birdsLeftOnStorage() {
+		time();
 		int count = 0;
 		for (String[] array : birds) {
 			count += Integer.parseInt(array[1]);
@@ -46,6 +64,7 @@ public class HomeworkBirds {
 	}
 
 	static int moneyInVault(String[][] array) {
+		time();
 		int i = 0, i1 = 0, i2 = 0, i3 = 0;
 		int k = 0, k1 = 0, k2 = 0, k3 = 0;
 		i += Integer.parseInt(array[0][2]);
@@ -61,6 +80,7 @@ public class HomeworkBirds {
 	}
 
 	static int getBirdsCount(String type) {
+		time();
 		for (String[] arr : birds) {
 			if (type.equals(arr[0])) {
 				return Integer.parseInt(arr[1]);
@@ -70,8 +90,7 @@ public class HomeworkBirds {
 	}
 
 	static String[] needNewDelivery() {
-		System.out.println("     ---Need To deliver---       ");
-		System.out.println();
+		time();
 		String delivery = "";
 		int count;
 		for (String[] arr : birds) {
@@ -84,6 +103,7 @@ public class HomeworkBirds {
 	}
 
 	static void getAllInformation(String[][] array) {
+		time();
 		int k = 0;
 		for (String[] s : array) {
 			if (s != null) {
