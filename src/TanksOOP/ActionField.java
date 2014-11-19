@@ -19,42 +19,41 @@ public class ActionField extends JPanel {
 
 	void runTheGame() throws Exception {
 
-		tank.moveRandom();
-
+//		T34.showInfo();
+//		Tiger.showInfo();
+// 		BT7.showInfo();
+		
+		
 	}
 
 	public void processTurn(Tank tank) throws Exception {
 		repaint();
 	}
-
+	
 	public void processMoveToQuadrant(int v, int h) throws Exception {
 		String coordinates = getQuadrantXY(v, h);
 		int separator = coordinates.indexOf("_");
 		int y = Integer.parseInt(coordinates.substring(0, separator));
 		int x = Integer.parseInt(coordinates.substring(separator + 1));
-
-		if (tank.getX() < x) {
-			while (tank.getX() != x) {
-				tank.turn(4);
-				tank.move(); // go right 4
+		
+		if(tank.getX() < x) { 
+			while (tank.getX()!= x) {
+				tank.move(); // go right 4 
 			}
 		} else {
 			while (tank.getX() != x) {
-				tank.turn(3);
-				tank.move(); // go left 3
+				tank.move(); // go left 3 
 			}
 		}
-
+				
 		if (tank.getY() < y) {
 			while (tank.getY() != y) {
-				tank.turn(2);
-				tank.move();// go down 2
+				tank.move(); // go down 2 
 			}
 		} else {
 			while (tank.getY() != y) {
-				tank.turn(1);
-				tank.move();// go top 1
-
+				tank.move(); // go top 1
+				
 			}
 		}
 		repaint();
@@ -100,19 +99,6 @@ public class ActionField extends JPanel {
 
 			repaint();
 			Thread.sleep(tank.getSpeed());
-		}
-	}
-
-	public void processMoveRandom(Tank tank) throws Exception {
-		this.tank = tank;
-		Random r = new Random();
-		int i;
-		while (true) {
-			i = r.nextInt(5);
-			if (i > 0) {
-				tank.turn(i);
-				tank.move();
-			}
 		}
 	}
 

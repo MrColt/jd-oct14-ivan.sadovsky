@@ -18,15 +18,15 @@ import javax.swing.WindowConstants;
 public class BattleFieldTemplate2 extends JPanel {
 
 	final boolean COLORDED_MODE = false;
-
+	
 	final int BF_WIDTH = 576;
 	final int BF_HEIGHT = 576;
-
+	
 	// 1 - top, 2 - bottom, 3 - left, 4 - right
 	int tankDirection = 1;
 
-	int tankX = 256;
-	int tankY = 256;
+	int tankX = 128;
+	int tankY = 512;
 	
 	int bulletX = -100;
 	int bulletY = -100;
@@ -34,153 +34,74 @@ public class BattleFieldTemplate2 extends JPanel {
 	int speed = 22;
 	int bulletSpeed = 5;
 
-	String[][] battleField = {  { "B", "B", "B", "B", "B", "B", "B", "B", "B" },
-								{ "B", "B", "B", "B", "B", "B", "B", "B", "B" },
-								{ "B", "B", "B", "B", "B", "B", "B", "B", "B" },
-								{ "B", "B", "B", " ", " ", " ", "B", "B", "B" },
-								{ "B", "B", "B", " ", " ", " ", "B", "B", "B" },
-								{ "B", "B", "B", " ", " ", " ", "B", "B", "B" },
-								{ "B", "B", "B", "B", "B", "B", "B", "B", "B" },
-								{ "B", "B", "B", "B", "B", "B", "B", "B", "B" },
-								{ "B", "B", "B", "B", "B", "B", "B", "B", "B" } };
+	String[][] battleField = {
+			{"B", "B", "B", "B", "B", "B", "B", "B", "B"},
+			{"B", " ", " ", " ", " ", " ", " ", " ", "B"},
+			{"B", " ", " ", " ", "B", "B", " ", " ", "B"},
+			{"B", " ", " ", " ", "B", "B", " ", " ", "B"},
+			{"B", " ", " ", " ", "B", "B", " ", " ", "B"},
+			{"B", " ", "B", "B", "B", "B", " ", " ", "B"},
+			{"B", " ", " ", " ", " ", "B", " ", " ", "B"},
+			{"B", " ", " ", "B", "B", "B", "B", "B", "B"},
+			{"B", "B", "B", "B", "B", "B", "B", "B", "B"}
+		};
 
 	/**
 	 * Write your code here.
 	 */
 	void runTheGame() throws Exception {
 		
-		moveRandom();
+		clean (BF_WIDTH);
+		}
 		
-		while(true){
-			clean();
-		}		
-	}
 
-	void clean() throws Exception {
-		int step = 64, x, y, dist1 = 512, dist2 = 512, dist3 = 512, dist4 = 512, min = 512;
-
-		x = tankX;
-		y = tankY;
-		while (y > 0) {
-			y -= step;
-			if (!isEmpty(tankX, y)) {
-				dist1 = tankY - y - 64;
-				break;
-			}
-		}
-
-		x = tankX;
-		y = tankY;
-		while (y < 512) {
-			y += step;
-			if (!isEmpty(tankX, y)) {
-				dist2 = y - tankY - 64;
-				break;
-			}
-		}
-
-		x = tankX;
-		y = tankY;
-		while (x > 0) {
-			x -= step;
-			if (!isEmpty(x, tankY)) {
-				dist3 = tankX - x - 64;
-				break;
-			}
-		}
-
-		x = tankX;
-		y = tankY;
-		while (x < 512) {
-			x += step;
-			if (!isEmpty(x, tankY)) {
-				dist4 = x - tankX - 64;
-				break;
-			}
-		}
-
-		int[] temp = { dist1, dist2, dist3, dist4 };
-
-		int direction = 1;
-
-		for (int i = 0; i < temp.length; i++) {
-			if (temp[i] < min) {
-				min = temp[i];
-				direction = i + 1;
-			}
-		}
-
-		if (min == 512) {
-			moveRandom();
-			return;
-		}
-		turn(direction);
-		fire();
-
-	}
-
-	boolean isEmpty(int cX, int cY) {
-		String coordinates;
-		coordinates = getQuadrant(cX, cY);
-
-		int separator = coordinates.indexOf("_");
-		int y = Integer.parseInt(coordinates.substring(0, separator));
-		int x = Integer.parseInt(coordinates.substring(separator + 1));
-		
-		if ((y >= 0 && y < battleField.length)
-				&& (x >= 0 && x < battleField.length)) {
-			if (!battleField[y][x].trim().isEmpty()) { 
-				return false;
-			}
-		}
-		return true;
-	}
 	
 	boolean processInterception() {
 		String coordinates = getQuadrant(bulletX, bulletY);
 		int y = Integer.parseInt(coordinates.split("_")[0]);
 		int x = Integer.parseInt(coordinates.split("_")[1]);
-
+		
 		if (y >= 0 && y < 9 && x >= 0 && x < 9) {
 			if (!battleField[y][x].trim().isEmpty()) {
-				battleField[y][x] = "";
+				battleField[y][x] ="";
 				return true;
 			}
 		}
 		return false;
 	}
-
+	
 	String getQuadrant(int x, int y) {
 		return y / 64 + "_" + x / 64;
 	}
+	
+	
 
+	
 	void fire() throws Exception {
-		bulletX = tankX + 25; // ÑƒÑÑ‚Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÑŽÑ‚ÑÑ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹
-		bulletY = tankY + 25; //
-
+		bulletX = tankX + 25; // óñòíàâëèâàþòñÿ êîîðäèíàòû
+		bulletY = tankY + 25; // 
+		
 		int step = 1;
-		turn(tankDirection);
-		while ((bulletX > -14 && bulletX < 590)
-				&& (bulletY > 14 && bulletY < 590)) {
+		while ((bulletX > -14 && bulletX < 590) && (bulletY > 14 && bulletY < 590)) {
 			if (tankDirection == 1) {
 				bulletY -= step;
 			} else if (tankDirection == 2) {
-				bulletY += step;
+				bulletY +=step;
 			} else if (tankDirection == 3) {
-				bulletX -= step;
+				bulletX -=step;
 			} else {
-				bulletX += step;
+				bulletX +=step;
 			}
-
+			
 			if (processInterception()) {
 				bulletX = -100;
 				bulletY = -100;
 			}
-
+			
 			repaint();
 			Thread.sleep(bulletSpeed);
 		}
-
+		
 	}
 
 	String getQuadrantXY(int v, int h) {
@@ -193,32 +114,26 @@ public class BattleFieldTemplate2 extends JPanel {
 
 		// check limits x: 0, 513; y: 0, 513
 		if ((direction == 1 && tankY == 0) || (direction == 2 && tankY >= 512)
-				|| (direction == 3 && tankX == 0)
-				|| (direction == 4 && tankX >= 512)) {
-			System.out.println("[illegal move] direction: " + direction
-					+ " tankX: " + tankX + ", tankY: " + tankY);
+				|| (direction == 3 && tankX == 0) || (direction == 4 && tankX >= 512)) {
+			System.out.println("[illegal move] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
 			return;
 		}
-
+		
 		turn(direction);
 
 		while (covered < 64) {
 			if (direction == 1) {
 				tankY -= step;
-				System.out.println("[move up] direction: " + direction
-						+ " tankX: " + tankX + ", tankY: " + tankY);
+				System.out.println("[move up] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
 			} else if (direction == 2) {
 				tankY += step;
-				System.out.println("[move down] direction: " + direction
-						+ " tankX: " + tankX + ", tankY: " + tankY);
+				System.out.println("[move down] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
 			} else if (direction == 3) {
 				tankX -= step;
-				System.out.println("[move left] direction: " + direction
-						+ " tankX: " + tankX + ", tankY: " + tankY);
+				System.out.println("[move left] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
 			} else {
 				tankX += step;
-				System.out.println("[move right] direction: " + direction
-						+ " tankX: " + tankX + ", tankY: " + tankY);
+				System.out.println("[move right] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
 			}
 			covered += step;
 
@@ -226,24 +141,23 @@ public class BattleFieldTemplate2 extends JPanel {
 			Thread.sleep(speed);
 		}
 	}
-
-	void turn(int direction) {
-		tankDirection = direction;
-		repaint();
-	}
 	
-	void moveRandom() throws Exception {
+	void turn(int direction) {
+			tankDirection = direction;
+			repaint();
+		}							
+
+	void moveRandom() throws Exception { 
 		Random r = new Random();
-		int i, j;
+		int i;
 		while (true) {
 			i = r.nextInt(5);
-			j = r.nextInt(5);
-			if (i > 0 && j > 0) {
-				moveToQuadrant(i, j);
+			if (i > 0) {
+				move(i);
 			}
 		}
 	}
-
+	
 	void moveToQuadrant(int v, int h) throws Exception {
 		String coordinates = getQuadrantXY(v, h);
 		int separator = coordinates.indexOf("_");
@@ -256,10 +170,10 @@ public class BattleFieldTemplate2 extends JPanel {
 				fire();
 				move(4);
 			}
-
+			
 		} else {
 			while (tankX != x) {
-				turn(3);
+				turn (3);
 				fire();
 				move(3);
 			}
@@ -279,26 +193,30 @@ public class BattleFieldTemplate2 extends JPanel {
 			}
 		}
 	}
+		void clean (int direction) throws Exception {
+			moveToQuadrant (1, 9);
+			moveToQuadrant (9, 1);
+			moveToQuadrant (5, 2);
+			moveToQuadrant (5, 3);
+			moveToQuadrant (6, 3);
+			moveToQuadrant (5, 5);
+			moveToQuadrant (6, 5);
+			moveToQuadrant (6, 6);
+			moveToQuadrant (6, 7);
+			moveToQuadrant (6, 8);
+			moveToQuadrant (5, 3);
 
-	void clean(int direction) throws Exception {
-		moveToQuadrant(1, 9);
-		moveToQuadrant(9, 1);
-		moveToQuadrant(5, 2);
-		moveToQuadrant(5, 3);
-		moveToQuadrant(6, 3);
-		moveToQuadrant(5, 5);
-		moveToQuadrant(6, 5);
-		moveToQuadrant(6, 6);
-		moveToQuadrant(6, 7);
-		moveToQuadrant(6, 8);
-		moveToQuadrant(5, 3);
-
+			
 	}
 
-	// Magic bellow. Do not worry about this now, you will understand everything
-	// in this course.
-	// Please concentrate on your tasks only.
+		
+	
 
+
+	// Magic bellow. Do not worry about this now, you will understand everything in this course.
+	// Please concentrate on your tasks only.
+	
+	
 	public static void main(String[] args) throws Exception {
 		BattleFieldTemplate2 bf = new BattleFieldTemplate2();
 		bf.runTheGame();
@@ -317,7 +235,7 @@ public class BattleFieldTemplate2 extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
+		
 		int i = 0;
 		Color cc;
 		for (int v = 0; v < 9; v++) {
@@ -336,25 +254,23 @@ public class BattleFieldTemplate2 extends JPanel {
 				g.fillRect(h * 64, v * 64, 64, 64);
 			}
 		}
-
+		
 		for (int j = 0; j < battleField.length; j++) {
 			for (int k = 0; k < battleField.length; k++) {
 				if (battleField[j][k].equals("B")) {
 					String coordinates = getQuadrantXY(j + 1, k + 1);
 					int separator = coordinates.indexOf("_");
-					int y = Integer.parseInt(coordinates
-							.substring(0, separator));
-					int x = Integer.parseInt(coordinates
-							.substring(separator + 1));
+					int y = Integer.parseInt(coordinates.substring(0, separator));
+					int x = Integer.parseInt(coordinates.substring(separator + 1));
 					g.setColor(new Color(0, 0, 255));
 					g.fillRect(x, y, 64, 64);
 				}
 			}
 		}
-
+		
 		g.setColor(new Color(255, 0, 0));
 		g.fillRect(tankX, tankY, 64, 64);
-
+		
 		g.setColor(new Color(0, 255, 0));
 		if (tankDirection == 1) {
 			g.fillRect(tankX + 20, tankY, 24, 34);
@@ -365,7 +281,7 @@ public class BattleFieldTemplate2 extends JPanel {
 		} else {
 			g.fillRect(tankX + 30, tankY + 20, 34, 24);
 		}
-
+		
 		g.setColor(new Color(255, 255, 0));
 		g.fillRect(bulletX, bulletY, 14, 14);
 	}

@@ -16,8 +16,7 @@ public class BattleFieldTemplateD3 extends JPanel {
 	boolean COLORDED_MODE = true;
 	// 1 - top, 2 - bottom, 3 - left, 4 - right
 	int tankDirection = 1;
-	
-	
+
 	int tankX = 0;
 	int tankY = 0;
 
@@ -27,23 +26,29 @@ public class BattleFieldTemplateD3 extends JPanel {
 	 * Write your code here.
 	 */
 	void runTheGame() throws Exception {
-		
-		moveToQuadrant (1, 2);
+
+		moveToQuadrant(1, 2);
 		Thread.sleep(2000);
-		moveToQuadrant (3, 4);
+		moveToQuadrant(3, 4);
 		Thread.sleep(2000);
-		moveToQuadrant (5, 5);
-	
-		
+		moveToQuadrant(5, 6);
+		Thread.sleep(2000);
+		moveToQuadrant(6, 6);
+		Thread.sleep(2000);
+		moveToQuadrant(1, 1);
+		Thread.sleep(2000);
+		moveToQuadrant(4, 5);
+
 	}
-	
-	void moveToQuadrant (int v, int h) throws Exception {
-		String coordinates = getQuadrantXY(v, h); // переводим в реальные координаты
+
+	void moveToQuadrant(int v, int h) throws Exception {
+		String coordinates = getQuadrantXY(v, h); // переводим в реальные
+													// координаты
 		int separator = coordinates.indexOf("_");
 		int y = Integer.parseInt(coordinates.substring(0, separator));
 		int x = Integer.parseInt(coordinates.substring(separator + 1));
-		
-		if(tankX < x) { 
+
+		if (tankX < x) {
 			while (tankX != x) {
 				move(4); // идем вправо
 			}
@@ -52,7 +57,7 @@ public class BattleFieldTemplateD3 extends JPanel {
 				move(3); // идем влево
 			}
 		}
-				
+
 		if (tankY < y) {
 			while (tankY != y) {
 				move(2); // идем вниз
@@ -63,60 +68,66 @@ public class BattleFieldTemplateD3 extends JPanel {
 			}
 		}
 	}
-	
-		String getQuadrantXY(int v, int h) {
-		
-			return (v - 1) * 64 + "_" + (h - 1 )* 64;
-		}
-		
-		void turn(int direction) {
-			tankDirection = direction;
+
+	String getQuadrantXY(int v, int h) {
+
+		return (v - 1) * 64 + "_" + (h - 1) * 64;
+	}
+
+	void turn(int direction) {
+		tankDirection = direction;
+	}
+
+	void move(int direction) throws Exception {
+		int step = 1; // кол-во пикселов на которые будет ездить танк
+		int covered = 0;// считает на сколько пикселов мы уже проехали
+
+		// дальше проверяем границы поля
+		if ((direction == 1 && tankY == 0)
+				|| (direction == 2 && tankY >= 512) // проверяет границы поля
+													// боя.
+				|| (direction == 3 && tankX == 0)
+				|| (direction == 4 && tankX >= 512)) {
+			System.out.println("illegal move direction: " + direction
+					+ " tankX: " + tankX + ", tankY: " + tankY);
+			return;
 		}
 
-		void move(int direction) throws Exception {
-			int step = 1; // кол-во пикселов на которые будет ездить танк
-			int covered = 0;// считает на сколько пикселов мы уже проехали
-			
-			// дальше проверяем границы поля
-			if ((direction == 1 && tankY == 0) || (direction == 2 && tankY >= 512) // проверяет границы поля боя.
-					|| (direction == 3 && tankX == 0) || (direction == 4 && tankX >=512)) {
-				System.out.println("illegal move direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
-				return;
-			}
-			
-			turn(direction);
-		
-		while (covered < 64) {		
+		turn(direction);
+
+		while (covered < 64) {
 			if (direction == 1) {
 				tankY -= step;
-				System.out.println("[move up] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
+				System.out.println("[move up] direction: " + direction
+						+ " tankX: " + tankX + ", tankY: " + tankY);
 			} else if (direction == 2) {
 				tankY += step;
-				System.out.println("[move down] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
+				System.out.println("[move down] direction: " + direction
+						+ " tankX: " + tankX + ", tankY: " + tankY);
 			} else if (direction == 3) {
 				tankX -= step;
-				System.out.println("[move left] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
+				System.out.println("[move left] direction: " + direction
+						+ " tankX: " + tankX + ", tankY: " + tankY);
 			} else {
 				tankX += step;
-				System.out.println("[move down] direction: " + direction + " tankX: " + tankX + ", tankY: " + tankY);
-			
-		}
-			covered += step;
-			
-			repaint();
-			Thread.sleep(speed); 
-			
-			}			
-		}	
+				System.out.println("[move down] direction: " + direction
+						+ " tankX: " + tankX + ", tankY: " + tankY);
 
-	
+			}
+			covered += step;
+
+			repaint();
+			Thread.sleep(speed);
+
+		}
+	}
+
 	// Magic bellow. Do not worry about this now, you will understand everything
 	// in this course.
 	// Please concentrate on your tasks only.
 
 	final int BF_WIDTH = 576;
 	final int BF_HEIGHT = 576;
-
 
 	public static void main(String[] args) throws Exception {
 		BattleFieldTemplateD3 bf = new BattleFieldTemplateD3();
