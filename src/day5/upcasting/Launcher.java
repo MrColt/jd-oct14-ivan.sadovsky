@@ -3,6 +3,9 @@ package day5.upcasting;
 public class Launcher {
 	public static void main(String [] args) {
 		
+		Instrument.play();
+		
+		
 //		System.out.println(Instrument.PRODUCER);
 //		
 //		Instrument i = new Instrument();

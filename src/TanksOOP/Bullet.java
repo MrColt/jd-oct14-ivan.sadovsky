@@ -3,11 +3,12 @@ package TanksOOP;
 public class Bullet {
 
 	private int speed = 5;
+	
 	private int x;
 	private int y;
-	private int direction;
+	private Direction direction;
 
-	public Bullet(int x, int y, int direction) {
+	public Bullet(int x, int y, Direction direction) {
 		this.x = x;
 		this.y = y;
 		this.direction = direction;
@@ -34,14 +35,6 @@ public class Bullet {
 		this.speed = speed;
 	}
 
-	public int getDirection() {
-		return direction;
-	}
-
-	public void setDirection(int direction) {
-		this.direction = direction;
-	}
-
 	public int getX() {
 		return x;
 	}
@@ -49,5 +42,15 @@ public class Bullet {
 	public int getY() {
 		return y;
 	}
+
+	public Direction getDirection() {
+		return direction;
+	}
+
+	public void setDirection(Direction direction) {
+		this.direction = direction;
+	}
+	
+	
 
 }
