@@ -17,8 +17,8 @@ public class HomeworkBirds {
 		// System.out.println("We have " + getBirdsCount("Duck") + " ducks.");
 		// System.out.println("New delivery needed: " + Arrays.toString(needNewDelivery()));
 		// getAllInformation(birds);
-		// System.out.println(birdsLeftOnStorage() + " birds left");
-		 System.out.println("Now we have: " + moneyInVault(birds) + " $");
+		 System.out.println(birdsLeftOnStorage() + " birds left");
+//		 System.out.println("Now we have: " + moneyInVault(birds) + " $");
 	}
 
 	public static void time() {

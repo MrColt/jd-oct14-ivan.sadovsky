@@ -19,12 +19,14 @@ public class ActionField extends JPanel {
 
 	void runTheGame() throws Exception {
 
-		getQuadrant(64, 64);
+		tank.move();
+		tank.fire();
+		tank.turn(Direction.UP);
+		tank.move();
+
 		
 	}
 	
-	
-
 	public void processTurn(Tank tank) throws Exception {
 		repaint();
 	}
@@ -39,6 +41,7 @@ public class ActionField extends JPanel {
 			while (tank.getX()!= x) {
 				tank.move(); // go right 4 
 			}
+			
 		} else {
 			while (tank.getX() != x) {
 				tank.move(); // go left 3 

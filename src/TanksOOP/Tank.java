@@ -16,7 +16,7 @@ public class Tank {
 
 	
 	public Tank(ActionField af, BattleField bf) {
-		this(af, bf, 128, 512, Direction.UP);
+		this(af, bf, 128, 512, Direction.LEFT);
 	}
 
 	public void setDirection(Direction direction) {
@@ -51,7 +51,7 @@ public class Tank {
 	}
 		
 	public void moveRandom() throws Exception {
-
+		
 	}
 
 	public void clean() throws Exception {

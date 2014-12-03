@@ -9,6 +9,12 @@ public class Book {
 	public Book() {
 
 	}
+	public Book(String name, String author, Category category) {
+		this.name= name;
+		this.author = author;
+		this.category = category;
+		
+	}
 
 	public String getName() {
 		return name;
