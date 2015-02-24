@@ -17,11 +17,11 @@ public class Demo {
 		Student e = new Student("Aleksei", "Aleksandrovich");
 		cr.enter(e);
 		
-//		cr.printStudentInfo(a);
-//		cr.printStudentInfo(b);
-//		cr.allStudents();
-//		System.out.println(cr.isPresent(a));
-	//	System.out.println("StudentCount: " + cr.getStudentCount());
+		cr.printStudentInfo(a);
+		cr.printStudentInfo(b);
+		cr.allStudents();
+		System.out.println(cr.isPresent(a));
+		System.out.println("StudentCount: " + cr.getStudentCount());
 		System.out.println();
 		
 	}

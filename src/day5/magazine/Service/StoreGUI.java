@@ -48,11 +48,11 @@ public class StoreGUI {
 
 		JFrame frame = new JFrame("Welcome to guitar store");
 		frame.setMinimumSize(new Dimension(600, 400));
-		frame.setLocation(400, 400);
 		frame.getContentPane().add(createPanel());
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 

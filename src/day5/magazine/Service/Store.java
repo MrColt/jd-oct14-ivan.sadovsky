@@ -226,33 +226,32 @@ public class Store {
 	}
 
 	public void printGuitarType(GuitarType guitarType) {
-		
-			for (int i = 0; i < guitar[guitarType.ordinal()].length; i++) {
-				if (guitar[guitarType.ordinal()][i] != null) {
-					for (int j = 0; j < guitar[guitarType.ordinal()][i].length; j++) {
-						if (guitar[guitarType.ordinal()][i][j] != null) {
-							System.out
-									.println(guitar[guitarType.ordinal()][i][j]
-											.getClass().getName()
-											+ " "
-											+ guitar[guitarType.ordinal()][i][j]
-													.getGuitarBrand()
-											+ " "
-											+ guitar[guitarType.ordinal()][i][j]
-													.getColor()
-											+ " "
-											+ guitar[guitarType.ordinal()][i][j]
-													.getModel()
-											+ " "
-											+ guitar[guitarType.ordinal()][i][j]
-													.getPrice());
 
-						}
+		for (int i = 0; i < guitar[guitarType.ordinal()].length; i++) {
+			if (guitar[guitarType.ordinal()][i] != null) {
+				for (int j = 0; j < guitar[guitarType.ordinal()][i].length; j++) {
+					if (guitar[guitarType.ordinal()][i][j] != null) {
+						System.out
+								.println(guitar[guitarType.ordinal()][i][j]
+										.getClass().getName()
+										+ " "
+										+ guitar[guitarType.ordinal()][i][j]
+												.getGuitarBrand()
+										+ " "
+										+ guitar[guitarType.ordinal()][i][j]
+												.getColor()
+										+ " "
+										+ guitar[guitarType.ordinal()][i][j]
+												.getModel()
+										+ " "
+										+ guitar[guitarType.ordinal()][i][j]
+												.getPrice());
+
 					}
 				}
 			}
+		}
 
-		
 		System.out
 				.println("________________________________________________________");
 
@@ -279,11 +278,11 @@ public class Store {
 	public int getGuitarIndexByModel(int k, int i, String model) {
 
 		int index = -1;
-		model = model.toUpperCase();		
+		model = model.toUpperCase();
 
 		for (int j = 0; j < getNumberOfGuitars(guitar[k][i]); j++) {
 			if (guitar[k][i][j].getModel().toUpperCase().equals(model)) {
-				index = j;				
+				index = j;
 			}
 		}
 

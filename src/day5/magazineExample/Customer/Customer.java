@@ -1,26 +1,24 @@
 package day5.magazineExample.Customer;
 
-public class Customer {
+import java.io.Serializable;
 
-	private String firstname;
-	private String lastname;
+public class Customer implements Serializable{
+
+	private String CustomerName;
 	
-	public Customer (String firstname, String lastname) {
-		
-		this.firstname = firstname;
-		this.lastname = lastname;
+	
+	public Customer() {
 		
 	}
 
-	public String getFirstname() {
-		return firstname;
+
+	public String getCustomerName() {
+		return CustomerName;
 	}
 
-	public String getLastname() {
-		return lastname;
+
+	public void setCustomerName(String customerName) {
+		CustomerName = customerName;
 	}
 	
-	public String getFullname() {
-		return firstname + " " + lastname;
-	}
 }
